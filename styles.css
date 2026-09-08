@@ -1,0 +1,476 @@
+/* ===========================================================
+   Journey — landing page
+   Fonts (auto-hospedadas — reemplaza los archivos en /fonts)
+   =========================================================== */
+@font-face {
+  font-family: 'Univers';
+  src: url('fonts/Univers-Regular.woff2') format('woff2'),
+       url('fonts/Univers-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Univers Condensed';
+  src: url('fonts/Univers-BoldCondensed.woff2') format('woff2'),
+       url('fonts/Univers-BoldCondensed.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===========================================================
+   Tokens
+   =========================================================== */
+:root {
+  --bg: #060404;
+  --bg-soft: #0c0808;
+  --ink: #f3ede6;
+  --ink-dim: rgba(243, 237, 230, 0.55);
+  --ember: #ff5a36;
+  --ember-deep: #7a1210;
+  --ember-dim: rgba(122, 18, 16, 0.55);
+  --line: rgba(243, 237, 230, 0.12);
+  --radius: 28px;
+
+  --font: 'Univers', Helvetica, Arial, sans-serif;
+  --font-display: 'Univers Condensed', 'Univers', Helvetica, Arial, sans-serif;
+
+  --container: 1240px;
+  --gutter: clamp(24px, 5vw, 64px);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+}
+
+/* ===========================================================
+   Nav
+   =========================================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px var(--gutter);  /* Espaciado ajustado para una barra más compacta */
+  background-color: #000000;   /* Fondo negro sólido */
+  color: #ffffff;              /* Texto en blanco */
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.nav__links {
+  display: flex;
+  gap: 32px;
+  font-size: 14px;
+}
+
+.nav__links a {
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.nav__links a:hover { opacity: 1; }
+
+.nav__cta {
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  padding: 9px 18px;
+  border-radius: 999px;
+}
+
+@media (max-width: 720px) {
+  .nav__links { display: none; }
+}
+
+/* ===========================================================
+   Hero
+   =========================================================== */
+.hero {
+  position: relative;
+  padding: 120px var(--gutter) 100px;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.hero__eyebrow {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.hero__banner {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  aspect-ratio: 21 / 9;
+  border-radius: 0;
+  overflow: hidden;
+  background: linear-gradient(100deg, #2a5c66 0%, #b23a1e 32%, #170303 55%, #d95a2c 72%, #f0c9ac 100%);
+}
+
+.hero__banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: normal;
+}
+
+.hero__content {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  gap: var(--gutter);
+  align-items: end;
+}
+
+.hero__headline {
+  margin-left: -100px;
+  /*margin-bottom: 310px;*/
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.4vw, 84px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.hero__text-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.hero__text {
+  margin: 0;
+  max-width: 32ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  text-align: margin-left;
+}
+
+@media (max-width: 860px) {
+  .hero__content { grid-template-columns: 1fr; align-items: start; }
+  .hero__text-group { grid-template-columns: 1fr; gap: 16px; }
+  .hero__text { text-align: left; max-width: 42ch; }
+}
+
+/* ===========================================================
+   Players — tres rectángulos en fila, full-bleed
+   =========================================================== */
+.players {
+  width: 100%;
+}
+
+.players__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100vh;
+}
+
+.player-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.player-tile:first-child { border-left: none; }
+
+.player-tile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(35%);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.6s ease;
+}
+
+.player-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
+}
+
+.player-tile:hover .player-tile__img,
+.player-tile.is-active .player-tile__img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.player-tile__name {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+@media (max-width: 780px) {
+  .players__row { grid-template-columns: 1fr; height: auto; }
+  .player-tile { height: 62vh; border-left: none; border-top: 1px solid var(--line); }
+  .player-tile:first-child { border-top: none; }
+}
+
+/* ---- detalle del jugador (se despliega al hacer click) ---- */
+.player-detail {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.5s ease;
+}
+
+.player-detail.is-open {
+  max-height: 900px;
+  opacity: 1;
+}
+
+.player-detail__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 80px var(--gutter);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.player-detail__eyebrow {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.player-detail__name {
+  margin: 0 0 24px;
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.player-detail__desc {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-dim);
+}
+
+.player-detail__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.player-detail__gallery img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--bg-soft);
+}
+
+@media (max-width: 780px) {
+  .player-detail__inner { grid-template-columns: 1fr; }
+  .player-detail__gallery { grid-template-columns: 1fr 1fr; }
+  .player-detail__gallery img { height: 200px; }
+  .player-detail.is-open { max-height: 1400px; }
+}
+
+/* ===========================================================
+   Contact
+   =========================================================== */
+.contact {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 140px var(--gutter) 120px;
+  border-top: 1px solid var(--line);
+}
+
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.contact__eyebrow {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.contact__title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.contact__text {
+  margin: 0 0 48px;
+  max-width: 42ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+}
+
+.contact__details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact__details li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  max-width: 420px;
+}
+
+.contact__details span {
+  font-size: 15px;
+  align-items: left;
+  color: var(--ink-dim);
+}
+
+.contact__details a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+  text-align: right
+}
+
+.contact__details a:hover { color: var(--ember); }
+
+/* ---- form ---- */
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact__field span {
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.contact__field input,
+.contact__field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 2px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.contact__field input::placeholder,
+.contact__field textarea::placeholder {
+  color: rgba(243, 237, 230, 0.3);
+}
+
+.contact__field input:focus,
+.contact__field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--ember);
+}
+
+.contact__submit {
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contact__submit:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.contact__note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ember);
+  min-height: 1.2em;
+}
+
+@media (max-width: 780px) {
+  .contact__inner { grid-template-columns: 1fr; }
+  .contact { padding: 100px var(--gutter) 100px; }
+}
