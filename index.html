@@ -8,42 +8,39 @@
 </head>
 <body>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="nav__logo">R E V E R S O</div>
   <nav class="nav__links">
     <a href="#players">Una mirada al pasado</a>
+    <a href="#contact">Contacto</a>
   </nav>
-  <a href="#contact" class="nav__cta">Contacto</a>
 </header>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <p class="hero__eyebrow">[ F O T O L I B R O ]</p>
+  <img src="images/stadium.png" alt="" class="hero__img">
+  <h1 class="hero__headline">
+    <span class="hero__main">REVERSO:</span>
+    <span class="hero__sub">retratos del 94</span>
+  </h1>
+</section>
 
-  <div class="hero__banner">
-    <!-- Reemplaza esta imagen por la tuya -->
-    <img src="images/stadium.png" alt="Textura orgánica de referencia para el banner del hero" class="hero__banner-img">
-  </div>
-
-  <div class="hero__content">
-    <h1 class="hero__headline">REVERSO:<br>retratos del 94</h1>
-    <div class="hero__text-group">
-      <p class="hero__text">
-        Foto libro de historias emblemáticas de algunos de los mejores jugadores, antes, durante y Post Mundial USA 94. Se abordan tres tópicos: las adicciones de Diego Maradona, la salud mental de Roberto Baggio tras la final del Mundial y el secuestro del padre de Romário meses antes de comenzar el torneo. A través de estas historias buscamos mostrar el lado humano de tres de los mejores futbolistas de su generación, considerando su carrera deportiva dentro de la cancha pero también poniendo un énfásis de lo que ocurrió dentro de la cancha. Nuestro concepto se ve aplicado en la mínima calidad de las fotografías, generando un contraste con el propio formato de foto libro, mientras el objeto celebra la imagen,
-      </p>     
-      <p class="hero__text">
-        el contenido visual se presenta deliberadamente degradado, como un eco de los recuerdos y de la forma en que estas historias fueron registradas en su momento. Nos apoyamos en la idea de la "imagen pobre" que plantea Hito Steyerl: una imagen de baja resolución no es una imagen fallida, sino una que prioriza la circulación y el acceso por sobre la nitidez, y que lleva impresa en su propia textura la huella de su recorrido. Así, el grano y la pérdida de definición no son un defecto técnico, sino parte del contenido: la imagen imperfecta como testimonio de una memoria colectiva, transmitida y repetida hasta desgastarse, tal como estas historias fueron vistas y recordadas por generaciones de hinchas.
-      </p>
-    </div>
+<section class="intro">
+  <div class="intro__inner">
+    <p class="intro__text">
+      Foto libro de historias emblemáticas de algunos de los mejores jugadores, antes, durante y Post Mundial USA 94. Se abordan tres tópicos: las adicciones de Diego Maradona, la salud mental de Roberto Baggio tras la final del Mundial y el secuestro del padre de Romário meses antes de comenzar el torneo. A través de estas historias buscamos mostrar el lado humano de tres de los mejores futbolistas de su generación, considerando su carrera deportiva dentro de la cancha pero también poniendo un énfásis de lo que ocurrió dentro de la cancha. Nuestro concepto se ve aplicado en la mínima calidad de las fotografías, generando un contraste con el propio formato de foto libro, mientras el objeto celebra la imagen,
+    </p>
+    <p class="intro__text">
+      el contenido visual se presenta deliberadamente degradado, como un eco de los recuerdos y de la forma en que estas historias fueron registradas en su momento. Nos apoyamos en la idea de la "imagen pobre" que plantea Hito Steyerl: una imagen de baja resolución no es una imagen fallida, sino una que prioriza la circulación y el acceso por sobre la nitidez, y que lleva impresa en su propia textura la huella de su recorrido. Así, el grano y la pérdida de definición no son un defecto técnico, sino parte del contenido: la imagen imperfecta como testimonio de una memoria colectiva, transmitida y repetida hasta desgastarse, tal como estas historias fueron vistas y recordadas por generaciones de hinchas.
+    </p>
   </div>
 </section>
 
 <!-- ============ PLAYERS ============ -->
 <section class="players" id="players">
-  <div class="players__row">
+  <div class="players__row" id="playersRow">
 
     <button class="player-tile" data-player="maradona" aria-expanded="false" aria-controls="playerDetail">
-      <!-- Reemplaza por tu propia imagen -->
       <img src="images/diegoprincipal.png" alt="Diego Maradona" class="player-tile__img">
       <span class="player-tile__name">Diego Maradona</span>
     </button>
@@ -60,69 +57,58 @@
 
   </div>
 
-  <!-- ============ PLAYER DETAIL (se despliega al hacer click) ============ -->
-  <div class="player-detail" id="playerDetail">
-    <div class="player-detail__inner">
-      <div class="player-detail__text">
-        <p class="player-detail__eyebrow" data-field="eyebrow">[ Jugador ]</p>
-        <h2 class="player-detail__name" data-field="name">Nombre</h2>
-        <p class="player-detail__desc" data-field="description">Descripción.</p>
-      </div>
-      <div class="player-detail__gallery">
-        <img data-field="image1" src="" alt="">
-        <img data-field="image2" src="" alt="">
+  <!-- Detalle: se despliega al hacer click -->
+  <div class="player-detail" id="playerDetail" data-light role="region" aria-labelledby="playerDetailName">
+    <div class="player-detail__clip">
+      <div class="player-detail__inner">
+        <div class="player-detail__text">
+          <p class="player-detail__eyebrow" data-field="eyebrow">[ Jugador ]</p>
+          <h2 class="player-detail__name" id="playerDetailName" data-field="name">Nombre</h2>
+          <p class="player-detail__desc" data-field="description">Descripción.</p>
+        </div>
+        <div class="player-detail__gallery">
+          <img data-field="image1" src="" alt="">
+          <img data-field="image2" src="" alt="">
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ CONTACT ============ -->
-<section class="contact" id="contact">
+<section class="contact" id="contact" data-light>
   <div class="contact__inner">
 
-    <div class="contact__intro">
+    <div class="contact__head">
       <p class="contact__eyebrow">[ Contacto ]</p>
       <h2 class="contact__title">Hablemos de<br>futbol... o libros!</h2>
-      <p class="contact__text">
-        Escríbenos si quieres saber más sobre nuestro trabajo, proponer una
-        colaboración o simplemente comentar algo sobre el proyecto :)
-      </p>
-
-      <ul class="contact__details">
-        <li>
-          <span>Email</span>
-          <a href="campusanomatias10@gmail.com">matias.munoz17@gmail.udp.cl</p>catalina.meza3@mail.udp.cl</a>
-        </li>
-        <li>
-          <span>Instagram</span>
-          <a href="https://instagram.com/tuusuario" target="_blank" rel="noopener">@camposssanto</p>@catamezac</a>
-        </li>
-        <li>
-          <span>Ubicación</span>
-          <a href="#">Santiago, Chile</a>
-        </li>
-      </ul>
     </div>
 
-    <form class="contact__form" id="contactForm">
-      <label class="contact__field">
-        <span>Nombre</span>
-        <input type="text" name="name" placeholder="Tu nombre" required>
-      </label>
+    <p class="contact__text">
+      Escríbenos si quieres saber más sobre nuestro trabajo, proponer una
+      colaboración o simplemente comentar algo sobre el proyecto :)
+    </p>
 
-      <label class="contact__field">
+    <ul class="contact__details">
+      <li>
         <span>Email</span>
-        <input type="email" name="email" placeholder="tu@email.com" required>
-      </label>
-
-      <label class="contact__field">
-        <span>Mensaje</span>
-        <textarea name="message" rows="5" placeholder="Cuéntame en qué estás pensando" required></textarea>
-      </label>
-
-      <button type="submit" class="contact__submit">Enviar mensaje</button>
-      <p class="contact__note" data-form-note aria-live="polite"></p>
-    </form>
+        <div>
+          <a href="mailto:matias.munoz17@gmail.udp.cl">matias.munoz17@gmail.udp.cl</a>
+          <a href="mailto:catalina.meza3@mail.udp.cl">catalina.meza3@mail.udp.cl</a>
+        </div>
+      </li>
+      <li>
+        <span>Instagram</span>
+        <div>
+          <a href="https://instagram.com/camposssanto" target="_blank" rel="noopener">@camposssanto</a>
+          <a href="https://instagram.com/catamezac" target="_blank" rel="noopener">@catamezac</a>
+        </div>
+      </li>
+      <li>
+        <span>Ubicación</span>
+        <div><a href="#">Santiago, Chile</a></div>
+      </li>
+    </ul>
 
   </div>
 </section>

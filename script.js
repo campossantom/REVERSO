@@ -1,56 +1,45 @@
 // ===========================================================
-// Spotlight effect: BREATH / BODY / MIND / SOUND se "iluminan"
-// a medida que cruzan el centro del viewport al hacer scroll.
+// Nav: se invierte (texto negro) cuando pasa sobre secciones claras
 // ===========================================================
-(function spotlightWords() {
-  const words = document.querySelectorAll('[data-word]');
-  if (!words.length) return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
-    words.forEach((w) => w.classList.add('is-lit'));
-    return;
-  }
+(function navTheme() {
+  const nav = document.getElementById('nav');
+  const lightSections = document.querySelectorAll('[data-light]');
+  if (!nav || !lightSections.length) return;
 
   let ticking = false;
 
-  function updateWords() {
-    const viewportCenter = window.innerHeight / 2;
-
-    words.forEach((word) => {
-      const rect = word.getBoundingClientRect();
-      const wordCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(viewportCenter - wordCenter);
-
-      // Qué tan "encendida" está la palabra según su cercanía al centro.
-      const lit = distance < window.innerHeight * 0.28;
-      word.classList.toggle('is-lit', lit);
+  function update() {
+    const y = nav.offsetHeight / 2;
+    let onLight = false;
+    lightSections.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.height > 0 && r.top <= y && r.bottom >= y) onLight = true;
     });
-
+    nav.classList.toggle('is-on-light', onLight);
     ticking = false;
   }
 
   function onScroll() {
     if (!ticking) {
-      window.requestAnimationFrame(updateWords);
+      window.requestAnimationFrame(update);
       ticking = true;
     }
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
-  updateWords();
+  update();
 })();
 
 // ===========================================================
 // Players: click en un rectángulo despliega su descripción
 // ===========================================================
 (function playerDetail() {
+  const row = document.getElementById('playersRow');
   const tiles = document.querySelectorAll('.player-tile');
   const detail = document.getElementById('playerDetail');
-  if (!tiles.length || !detail) return;
+  if (!row || !tiles.length || !detail) return;
 
-  // Reemplaza estos textos e imágenes por los tuyos.
   const PLAYERS = {
     maradona: {
       eyebrow: '[ Argentina — Mundial 94 ]',
@@ -98,6 +87,7 @@
     fields.image2.alt = data.name;
 
     detail.classList.add('is-open');
+    row.classList.add('has-active');
 
     tiles.forEach((t) => {
       t.classList.toggle('is-active', t === tile);
@@ -106,7 +96,6 @@
 
     currentPlayer = id;
 
-    // Deslizar hacia la descripción una vez que empieza a abrirse.
     requestAnimationFrame(() => {
       detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -114,6 +103,7 @@
 
   function closePlayer() {
     detail.classList.remove('is-open');
+    row.classList.remove('has-active');
     tiles.forEach((t) => {
       t.classList.remove('is-active');
       t.setAttribute('aria-expanded', 'false');
@@ -124,67 +114,12 @@
   tiles.forEach((tile) => {
     tile.addEventListener('click', () => {
       const id = tile.dataset.player;
-      if (currentPlayer === id) {
-        closePlayer();
-      } else {
-        openPlayer(id, tile);
-      }
+      if (currentPlayer === id) closePlayer();
+      else openPlayer(id, tile);
     });
   });
-})();
 
-// ===========================================================
-// Parallax sutil en las tarjetas de la sección "app showcase"
-// ===========================================================
-(function cardParallax() {
-  const cards = document.querySelectorAll('.app-card[data-speed]');
-  if (!cards.length) return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  let ticking = false;
-
-  function updateParallax() {
-    const viewportCenter = window.innerHeight / 2;
-
-    cards.forEach((card) => {
-      const speed = parseFloat(card.dataset.speed) || 0.05;
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.top + rect.height / 2;
-      const offset = (viewportCenter - cardCenter) * speed;
-      card.style.transform = `translateY(${offset}px)`;
-    });
-
-    ticking = false;
-  }
-
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  updateParallax();
-})();
-
-// ===========================================================
-// Contact form: feedback visual al enviar (sin backend).
-// Reemplaza este bloque por tu integración real (Formspree,
-// EmailJS, tu propio endpoint, etc.) cuando la tengas lista.
-// ===========================================================
-(function contactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  const note = form.querySelector('[data-form-note]');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    note.textContent = 'Gracias, tu mensaje quedó registrado. Te responderé pronto.';
-    form.reset();
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && currentPlayer) closePlayer();
   });
 })();
